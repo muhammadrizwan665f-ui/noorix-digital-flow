@@ -20,11 +20,12 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { to: "/", label: "HOME" },
-  { to: "/shop", label: "HIJAB", search: { q: "hijab" } },
-  { to: "/shop", label: "ABAYAH", search: { category: "Abayah" } },
-  { to: "/shop", label: "STOLES", search: { q: "stole" } },
-  { to: "/shop", label: "CHADAREN", search: { q: "chadar" } },
-  { to: "/shop", label: "ACCESSORIES", search: { category: "Accessories" } },
+  { to: "/shop", label: "AI TOOLS", search: { category: "AI Tools" } },
+  { to: "/shop", label: "IPTV", search: { q: "iptv" } },
+  { to: "/shop", label: "STREAMING", search: { category: "Streaming Accounts" } },
+  { to: "/shop", label: "DESIGN TOOLS", search: { q: "design" } },
+  { to: "/shop", label: "GROWTH", search: { category: "Social Media Growth" } },
+  { to: "/shop", label: "DEVELOPMENT", search: { category: "Web Development" } },
   { to: "/shop", label: "NEW ARRIVAL" },
   { to: "/deals", label: "SALE" },
 ] as any[];
