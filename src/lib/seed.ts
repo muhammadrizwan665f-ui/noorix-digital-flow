@@ -117,10 +117,10 @@ export const SEED_BLOG: BlogPost[] = [
 ];
 
 export const LIVE_SALES_FEED = [
-  "Ayesha from Lahore purchased Crinkle Silk Hijab",
-  "Maryam from Karachi purchased Soft Cotton Namaz Chadar",
-  "Fatima from Islamabad purchased Georgette Luxe Hijab",
-  "Hira from Faisalabad purchased Undercap 3-Pack",
-  "Zainab from Multan purchased Magnet Pin Set",
-  "Sana from Peshawar purchased Printed Monogram Stole",
+  "Ayesha from Lahore purchased ChatGPT Plus",
+  "Maryam from Karachi purchased Netflix Premium",
+  "Fatima from Islamabad purchased Canva Pro",
+  "Hira from Faisalabad purchased ExpressVPN",
+  "Zainab from Multan purchased Instagram Followers",
+  "Sana from Peshawar purchased Adobe Creative Cloud",
 ];

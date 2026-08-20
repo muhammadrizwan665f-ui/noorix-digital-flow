@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Shop premium AI tools, software subscriptions, streaming accounts, VPNs and social media growth services in Pakistan. Instant delivery, cash on delivery available.",
+          "Shop premium AI tools, software subscriptions, streaming accounts, VPNs and social media growth services in Pakistan. Delivered instantly on WhatsApp.",
       },
       { property: "og:title", content: "Noorix Digital Lab — Premium Digital Products & Services" },
       {
@@ -39,8 +39,8 @@ export const Route = createFileRoute("/")({
 
 const TRUST = [
   { Icon: Truck, title: "Fast Delivery", text: "2-4 days nationwide" },
-  { Icon: Wallet, title: "Cash on Delivery", text: "Pay when it arrives" },
-  { Icon: ShieldCheck, title: "Premium Fabrics", text: "Hand-checked quality" },
+  { Icon: Wallet, title: "Secure Payments", text: "EasyPaisa, JazzCash & Bank Transfer" },
+  { Icon: ShieldCheck, title: "Verified Accounts", text: "Hand-checked quality" },
   { Icon: Sparkles, title: "Ethical Sourcing", text: "Direct from makers" },
 ];
 
@@ -335,7 +335,7 @@ function Home() {
         <Reveal>
           <h2 className="text-3xl font-bold sm:text-4xl">Ready to build your everyday edit?</h2>
           <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            Order now and pay cash on delivery, or pay in advance with EasyPaisa, Raast or bank
+            Order now and pay with EasyPaisa, JazzCash or bank transfer — delivered instantly on WhatsApp
             transfer.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">

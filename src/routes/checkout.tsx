@@ -7,15 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Copy, Loader2, Upload } from "lucide-react";
-import { PROVINCES, computeTotals, formatPKR, lineTotal } from "@/lib/pricing";
+import { computeTotals, formatPKR, lineTotal } from "@/lib/pricing";
 import { useStore } from "@/lib/store";
 import { colorImage } from "@/lib/product-image";
 import { createOrder, getPaymentAccount } from "@/lib/shop.functions";
@@ -28,10 +21,10 @@ export const Route = createFileRoute("/checkout")({
       {
         name: "description",
         content:
-          "Complete your Noorix Digital Lab order with cash on delivery, EasyPaisa, Raast or bank transfer.",
+          "Complete your Noorix Digital Lab order — instant delivery on WhatsApp with EasyPaisa, JazzCash or bank transfer.",
       },
       { property: "og:title", content: "Secure Checkout — Noorix Digital Lab" },
-      { property: "og:description", content: "COD and advance payment options for Pakistan." },
+      { property: "og:description", content: "Instant WhatsApp delivery, secure payments." },
       { property: "og:url", content: "/checkout" },
       { name: "robots", content: "noindex" },
     ],
@@ -42,14 +35,8 @@ export const Route = createFileRoute("/checkout")({
 
 const schema = z.object({
   fullName: z.string().trim().min(3, "Enter your full name").max(80),
-  phone: z.string().trim().regex(/^03\d{2}[- ]?\d{7}$/, "Enter a valid number like 03001234567"),
-  whatsapp: z.string().trim().min(11, "Enter your WhatsApp number").max(20),
+  whatsapp: z.string().trim().min(10, "Enter your WhatsApp number").max(20),
   email: z.string().trim().email("Invalid email").max(255).optional().or(z.literal("")),
-  province: z.string().min(2, "Select your province"),
-  city: z.string().trim().min(2, "Enter your city").max(60),
-  area: z.string().trim().min(2, "Enter your area").max(80),
-  address: z.string().trim().min(10, "Enter your complete address").max(300),
-  postalCode: z.string().trim().max(10).optional().or(z.literal("")),
   notes: z.string().trim().max(500).optional().or(z.literal("")),
 });
 
@@ -89,16 +76,9 @@ function Checkout() {
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
-    phone: "",
     whatsapp: "",
     email: "",
-    province: "Punjab",
-    city: "",
-    area: "",
-    address: "",
-    postalCode: "",
     notes: "",
-    urgent: false,
   });
 
   const lines = cart
@@ -111,7 +91,7 @@ function Checkout() {
 
   const activeMethods = payments.filter((p) => p.enabled);
   const selected = activeMethods.find((p) => p.id === method) ?? null;
-  const totals = computeTotals({ lines, method: selected, couponPct: 0, settings, province: form.province, city: form.city, urgent: form.urgent });
+  const totals = computeTotals({ lines, method: selected, couponPct: 0, settings });
 
   if (lines.length === 0) {
     return (
@@ -157,17 +137,10 @@ function Checkout() {
             ...(colorName ? { colorName } : {}),
           })),
           paymentCode: method,
-          urgent: form.urgent,
           customer: {
             fullName: form.fullName,
-            phone: form.phone,
             whatsapp: form.whatsapp,
             ...(form.email ? { email: form.email } : {}),
-            province: form.province,
-            city: form.city,
-            area: form.area,
-            address: form.address,
-            ...(form.postalCode ? { postalCode: form.postalCode } : {}),
             ...(form.notes ? { notes: form.notes } : {}),
           },
           ...(proof ? { screenshot: proof } : {}),
@@ -193,98 +166,14 @@ function Checkout() {
       <form onSubmit={submit} className="mt-8 grid gap-8 lg:grid-cols-[1fr_380px]">
         <div className="space-y-6">
           <section className="premium-card p-6">
-            <h2 className="font-display text-lg font-bold">Delivery details</h2>
+            <h2 className="font-display text-lg font-bold">Your details</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              We deliver instantly on WhatsApp — no shipping address needed.
+            </p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <Field label="Full name" value={form.fullName} onChange={set("fullName")} required />
-              <Field label="Phone number" value={form.phone} onChange={set("phone")} required placeholder="03001234567" />
               <Field label="WhatsApp number" value={form.whatsapp} onChange={set("whatsapp")} required placeholder="03001234567" />
-              <Field label="Email (optional)" value={form.email} onChange={set("email")} type="email" />
-              <div>
-                <Label htmlFor="province">Province</Label>
-                <Select value={form.province} onValueChange={set("province")}>
-                  <SelectTrigger id="province" className="mt-1.5">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {PROVINCES.map((p) => (
-                      <SelectItem key={p} value={p}>
-                        {p}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <Field label="City" value={form.city} onChange={set("city")} required />
-              <Field label="Area" value={form.area} onChange={set("area")} required />
-              <Field label="Postal code (optional)" value={form.postalCode} onChange={set("postalCode")} />
-            </div>
-            <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 p-4">
-              <Label className="mb-2 block text-sm font-bold">Courier & Delivery Selection</Label>
-              <RadioGroup
-                value={form.urgent ? "urgent" : "standard"}
-                onValueChange={(v) => set("urgent")(v === "urgent")}
-                className="flex flex-col gap-3"
-              >
-                {form.city?.toLowerCase().trim() === "karachi" ? (
-                  <>
-                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-border bg-background px-4 py-3 hover:border-primary transition-colors">
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value="standard" />
-                        <div className="flex flex-col">
-                          <span className="text-sm font-medium">Karachi Standard Delivery</span>
-                          <span className="text-[10px] text-muted-foreground italic">Karachi delivery 1-3 days · 0 advance (100% COD)</span>
-                        </div>
-                      </div>
-                      <span className="text-sm font-bold">300 DC</span>
-                    </label>
-                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-border bg-background px-4 py-3 hover:border-primary transition-colors">
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value="urgent" />
-                        <div className="flex flex-col">
-                          <span className="text-sm font-medium">Karachi Express (Urgent)</span>
-                          <span className="text-[10px] text-muted-foreground italic">24 Hours delivery · 0 advance (100% COD)</span>
-                        </div>
-                      </div>
-                      <span className="text-sm font-bold text-primary">450 DC</span>
-                    </label>
-                  </>
-                ) : (
-                  <>
-                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-border bg-background px-4 py-3 hover:border-primary transition-colors">
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value="standard" />
-                        <div className="flex flex-col">
-                          <span className="text-sm font-medium">Standard Delivery (TRAX/Other)</span>
-                          <span className="text-[10px] text-muted-foreground italic">5-6 working days · 350 advance</span>
-                        </div>
-                      </div>
-                      <span className="text-sm font-bold">350 DC</span>
-                    </label>
-                    <label className="flex cursor-pointer items-center justify-between rounded-xl border border-border bg-background px-4 py-3 hover:border-primary transition-colors">
-                      <div className="flex items-center gap-3">
-                        <RadioGroupItem value="urgent" />
-                        <div className="flex flex-col">
-                          <span className="text-sm font-medium">Urgent / Leopard Courier</span>
-                          <span className="text-[10px] text-muted-foreground italic">Fastest delivery · 450 advance</span>
-                        </div>
-                      </div>
-                      <span className="text-sm font-bold text-primary">450 DC</span>
-                    </label>
-                  </>
-                )}
-              </RadioGroup>
-            </div>
-            <div className="mt-4">
-              <Label htmlFor="address">Complete address</Label>
-              <Textarea
-                id="address"
-                className="mt-1.5"
-                maxLength={300}
-                value={form.address}
-                onChange={(e) => set("address")(e.target.value)}
-                placeholder="House / shop number, street, landmark"
-                required
-              />
+              <Field label="Email (optional)" value={form.email} onChange={set("email")} type="email" className="sm:col-span-2" />
             </div>
             <div className="mt-4">
               <Label htmlFor="notes">Order notes (optional)</Label>
@@ -394,14 +283,6 @@ function Checkout() {
 
           <dl className="mt-5 space-y-2 border-t border-primary/20 pt-4 text-sm">
             <Line label="Subtotal" value={formatPKR(totals.subtotal)} />
-            <Line
-              label={
-                form.city?.toLowerCase().trim() === "karachi"
-                  ? form.urgent ? "Karachi Express (24h)" : "Karachi Standard"
-                  : form.urgent ? "Delivery (Urgent/Leopard)" : "Delivery (Standard/TRAX)"
-              }
-              value={totals.shipping === 0 ? "FREE" : formatPKR(totals.shipping)}
-            />
             <div className="flex items-baseline justify-between border-t border-primary/20 pt-3">
               <dt className="font-display font-bold">Total</dt>
               <dd className="font-display text-2xl font-bold text-primary">
@@ -410,29 +291,14 @@ function Checkout() {
             </div>
             <div className="rounded-xl bg-surface border border-primary/10 p-3 text-[11px] text-primary space-y-2">
               <p className="font-bold flex items-center gap-1.5">
-                <span className="text-base">🚀</span> Delivery & Payment Info
+                <span className="text-base">⚡</span> Delivery & Payment Info
               </p>
               <ul className="list-inside list-disc space-y-1 opacity-90">
-                {form.city?.toLowerCase().trim() === "karachi" ? (
-                  <>
-                    <li>Karachi: 0 advance (100% Cash on Delivery possible).</li>
-                    <li>Estimated delivery: {form.urgent ? "24 Hours (Urgent)" : "1-3 working days"}.</li>
-                  </>
-                ) : (
-                  <>
-                    <li>Non-Karachi cities: Advance payment required for confirmation.</li>
-                    <li>Minimum {formatPKR(350)} advance required.</li>
-                    <li>Leopard Courier: {formatPKR(450)} advance required.</li>
-                    <li>Out of city delivery: 4-6 days.</li>
-                  </>
-                )}
+                <li>Delivered on WhatsApp within 30 minutes of payment confirmation.</li>
+                <li>Full payment required upfront to confirm your order.</li>
               </ul>
               <p className="font-medium mt-2 pt-2 border-t border-primary/10">
-                {method === "cod"
-                  ? form.city?.toLowerCase().trim() === "karachi"
-                    ? "Cash on delivery available with 0 advance."
-                    : `Pay advance now, rest on delivery.`
-                  : `Pay total amount to confirm your order.`}
+                Pay the total amount now to confirm your order.
               </p>
             </div>
           </dl>
@@ -464,6 +330,7 @@ function Field({
   type = "text",
   required,
   placeholder,
+  className,
 }: {
   label: string;
   value: string;
@@ -471,10 +338,11 @@ function Field({
   type?: string;
   required?: boolean;
   placeholder?: string;
+  className?: string;
 }) {
   const id = label.toLowerCase().replace(/[^a-z]+/g, "-");
   return (
-    <div>
+    <div className={className}>
       <Label htmlFor={id}>{label}</Label>
       <Input
         id={id}

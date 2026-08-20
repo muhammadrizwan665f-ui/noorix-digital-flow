@@ -41,7 +41,7 @@ export const Route = createFileRoute("/shop")({
       { property: "og:title", content: "Shop All Products — Noorix Digital Lab" },
       {
         property: "og:description",
-        content: "Filter by category, price, rating and availability. Nationwide cash on delivery.",
+        content: "Filter by category, price and availability. Instant delivery on WhatsApp.",
       },
       { property: "og:url", content: "/shop" },
     ],

@@ -49,20 +49,19 @@ function AdminOrders() {
     (o) =>
       (filter === "all" || o.status === filter) &&
       (q.trim() === "" ||
-        (o.id + o.customer.fullName + o.customer.phone + o.customer.city)
+        (o.id + o.customer.fullName + o.customer.whatsapp)
           .toLowerCase()
           .includes(q.toLowerCase())),
   );
 
   function exportCsv() {
     const rows = [
-      ["Order", "Date", "Name", "Phone", "City", "Payment", "Total", "Status"],
+      ["Order", "Date", "Name", "WhatsApp", "Payment", "Total", "Status"],
       ...list.map((o) => [
         o.id,
         new Date(o.createdAt).toLocaleString(),
         o.customer.fullName,
-        o.customer.phone,
-        o.customer.city,
+        o.customer.whatsapp,
         o.paymentMethod,
         String(o.total),
         o.status,
@@ -156,9 +155,12 @@ function OrderRow({ order: o, products, reload, setOrderStatus }: { order: any; 
             {new Date(o.createdAt).toLocaleString()} · {o.paymentMethod.toUpperCase()}
           </p>
           <p className="mt-2 text-sm">
-            {o.customer.fullName} · {o.customer.phone} · {o.customer.city}, {o.customer.province}
+            {o.customer.fullName} · {o.customer.whatsapp}
+            {o.customer.email ? ` · ${o.customer.email}` : ""}
           </p>
-          <p className="text-xs text-muted-foreground">{o.customer.address}</p>
+          {o.customer.notes ? (
+            <p className="text-xs text-muted-foreground">{o.customer.notes}</p>
+          ) : null}
         </div>
         <div className="text-right">
           <p className="font-display text-xl font-bold text-primary">{formatPKR(o.total)}</p>

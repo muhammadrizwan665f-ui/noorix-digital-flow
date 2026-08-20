@@ -26,9 +26,9 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14">
         <div className="premium-card mb-14 flex flex-col gap-6 border border-primary p-6 text-primary md:grid md:grid-cols-2 md:items-center sm:p-8 bg-surface">
           <div>
-            <h3 className="font-display text-2xl font-bold">Join the Anayah circle</h3>
+            <h3 className="font-display text-2xl font-bold">Join the Noorix circle</h3>
             <p className="mt-2 text-sm opacity-90">
-              Be first to know about new hijab drops, restocks and private offers.
+              Be first to know about new tools, drops and private offers.
             </p>
           </div>
           <form
@@ -89,7 +89,7 @@ export function Footer() {
           <nav aria-label="Shop links">
             <h4 className="font-display text-sm font-bold uppercase tracking-widest">Shop</h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {["Hijabs", "Namaz Chadars", "Hijab Caps & Undercaps", "Hijab Accessories"].map(
+              {["AI Tools", "Streaming Accounts", "Social Media Growth", "VPN & Security"].map(
                 (c) => (
                   <li key={c}>
                     <Link to="/shop" search={{ category: c }} className="hover:text-primary">
@@ -144,7 +144,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <Truck className="mt-0.5 size-4 shrink-0 text-primary" />
-                <span>Nationwide COD available</span>
+                <span>Delivered via WhatsApp in 30 minutes</span>
               </li>
               <li className="flex items-start gap-2">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" />
@@ -157,7 +157,7 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
           <p>© 2021 Noorix Digital Lab. All rights reserved.</p>
           <p className="flex flex-wrap justify-center gap-x-2">
-            <span>EasyPaisa</span> · <span>Raast</span> · <span>Bank Transfer</span> · <span>COD</span>
+            <span>EasyPaisa</span> · <span>JazzCash</span> · <span>Bank Transfer</span>
           </p>
         </div>
       </div>

@@ -109,7 +109,7 @@ function Dashboard() {
                   {o.id} · {o.customer.fullName}
                 </span>
                 <span className="text-xs text-muted-foreground sm:text-sm">
-                  {o.customer.city} · {o.status} · {formatPKR(o.total)}
+                  {o.status} · {formatPKR(o.total)}
                 </span>
               </li>
             ))}

@@ -163,7 +163,7 @@ function Cart() {
               value={totals.shipping === 0 ? "FREE" : formatPKR(totals.shipping)}
             />
             <div className="flex items-baseline justify-between border-t border-primary/20 pt-3">
-              <dt className="font-display font-bold">Total (COD)</dt>
+              <dt className="font-display font-bold">Total</dt>
               <dd className="font-display text-2xl font-bold text-primary">
                 {formatPKR(totals.total)}
               </dd>

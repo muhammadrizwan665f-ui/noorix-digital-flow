@@ -54,9 +54,6 @@ export function computeTotals(opts: {
   method: PaymentMethod | null;
   couponPct: number;
   settings: Settings;
-  province?: string;
-  city?: string;
-  urgent?: boolean;
 }): CartTotals {
   let subtotal = 0;
   for (const l of opts.lines) {
@@ -67,34 +64,13 @@ export function computeTotals(opts: {
   const bulkDiscount = 0;
   const couponDiscount = 0;
   const paymentDiscount = 0;
-  const isUrgent = !!opts.urgent;
 
-  let rate = opts.settings.shippingFlat ?? 350;
-  const isKarachi = opts.city?.toLowerCase().trim() === "karachi";
-
-  if (isKarachi) {
-    rate = isUrgent 
-      ? (opts.settings.shippingKarachiUrgent || 450) 
-      : 300; // Standard Karachi only 300
-  } else {
-    // For non-Karachi, if urgent is selected it's always 450
-    if (isUrgent) {
-      rate = 450;
-    } else if (opts.province && opts.settings.provinceRates && opts.settings.provinceRates[opts.province]) {
-      rate = opts.settings.provinceRates[opts.province] ?? opts.settings.shippingFlat ?? 350;
-    }
-  }
-
-  const shipping = goods === 0 ? 0 : rate;
-
+  // Digital products delivered instantly via WhatsApp — no shipping, full payment upfront.
+  const shipping = 0;
   const total = goods + shipping;
-  // For Karachi, allow 0 advance on COD as requested.
-  // Otherwise, advanceDue for COD is typically just the shipping (delivery charge).
-  const advanceDue = opts.method?.id === "cod" 
-    ? (isKarachi ? 0 : shipping)
-    : total;
+  const advanceDue = total;
 
-  return { subtotal, bulkDiscount, couponDiscount, paymentDiscount, shipping, total, advanceDue, isUrgent };
+  return { subtotal, bulkDiscount, couponDiscount, paymentDiscount, shipping, total, advanceDue };
 }
 
 export function countdown(target: string | null) {

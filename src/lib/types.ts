@@ -137,14 +137,8 @@ export interface CartLine {
 
 export interface Customer {
   fullName: string;
-  phone: string;
   whatsapp: string;
   email?: string | undefined;
-  province: string;
-  city: string;
-  area: string;
-  address: string;
-  postalCode?: string | undefined;
   notes?: string | undefined;
 }
 

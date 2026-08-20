@@ -19,17 +19,10 @@ const cartSchema = z.object({
   screenshot: z
     .object({ dataUrl: z.string().max(6_000_000), name: z.string().max(200) })
     .optional(),
-  urgent: z.boolean().optional(),
   customer: z.object({
     fullName: z.string().trim().min(3).max(80),
-    phone: z.string().trim().min(10).max(20),
     whatsapp: z.string().trim().min(10).max(20),
     email: z.string().trim().max(255).optional(),
-    province: z.string().trim().min(2).max(60),
-    city: z.string().trim().min(2).max(60),
-    area: z.string().trim().min(2).max(80),
-    address: z.string().trim().min(8).max(300),
-    postalCode: z.string().trim().max(10).optional(),
     notes: z.string().trim().max(500).optional(),
   }),
 });
@@ -138,9 +131,6 @@ export const createOrder = createServerFn({ method: "POST" })
       method,
       couponPct: 0,
       settings,
-      province: data.customer.province,
-      city: data.customer.city,
-      urgent: !!data.urgent,
     });
 
     const orderNo = newOrderNo();

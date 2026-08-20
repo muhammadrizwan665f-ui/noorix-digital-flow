@@ -46,7 +46,7 @@ export const Route = createFileRoute("/product/$slug")({
       {
         name: "description",
         content:
-          "Premium Noorix Digital Lab subscriptions and services with instant delivery and cash on delivery across Pakistan.",
+          "Premium Noorix Digital Lab subscriptions and services delivered instantly on WhatsApp across Pakistan.",
       },
       { property: "og:type", content: "product" },
       { property: "og:url", content: `/product/${params.slug}` },
@@ -494,7 +494,7 @@ function ProductPage() {
 
           <div className="mt-3 grid gap-2 sm:mt-6 sm:grid-cols-3">
             {[
-              { Icon: Truck, t: "Karachi: 1-3 Working Days | Other Cities : 4-6 Days" },
+              { Icon: Truck, t: "Delivered on WhatsApp in 30 minutes" },
               { Icon: ShieldCheck, t: product.warranty },
               { Icon: Sparkles, t: "Verified Quality" },
             ].map(({ Icon, t: text }) => (

@@ -68,7 +68,7 @@ function Track() {
             {order.id} · {order.status}
           </p>
           <p className="text-sm text-muted-foreground">
-            {order.customer.fullName} · {order.customer.city} · {formatPKR(order.total)}
+            {order.customer.fullName} · {formatPKR(order.total)}
           </p>
           {order.trackingNumber ? (
             <p className="mt-2 text-sm">Tracking #: {order.trackingNumber}</p>

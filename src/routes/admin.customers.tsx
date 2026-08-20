@@ -15,15 +15,14 @@ function AdminCustomers() {
   const customersMap = new Map<string, { 
     name: string; 
     email: string; 
-    phone: string; 
-    city: string; 
+    whatsapp: string; 
     totalSpent: number; 
     orderCount: number;
     lastOrder: string;
   }>();
 
   orders.forEach(o => {
-    const key = o.customer.phone;
+    const key = o.customer.whatsapp;
     const existing = customersMap.get(key);
     if (existing) {
       existing.totalSpent += o.total;
@@ -35,8 +34,7 @@ function AdminCustomers() {
       customersMap.set(key, {
         name: o.customer.fullName,
         email: o.customer.email ?? "",
-        phone: o.customer.phone,
-        city: o.customer.city,
+        whatsapp: o.customer.whatsapp,
         totalSpent: o.total,
         orderCount: 1,
         lastOrder: o.createdAt
@@ -68,14 +66,14 @@ function AdminCustomers() {
               </thead>
               <tbody className="divide-y divide-border">
                 {customerList.map(c => (
-                  <tr key={c.phone} className="hover:bg-secondary/10 transition-colors">
+                  <tr key={c.whatsapp} className="hover:bg-secondary/10 transition-colors">
                     <td className="px-6 py-4">
                       <p className="font-semibold">{c.name}</p>
-                      <p className="text-xs text-muted-foreground">{c.city}</p>
+                      
                     </td>
                     <td className="px-6 py-4 space-y-1">
                       <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <Phone className="size-3" /> {c.phone}
+                        <Phone className="size-3" /> {c.whatsapp}
                       </div>
                       {c.email && (
                         <div className="flex items-center gap-1.5 text-muted-foreground">
@@ -102,11 +100,11 @@ function AdminCustomers() {
         {/* Mobile View */}
         <div className="space-y-4 sm:hidden">
           {customerList.map(c => (
-            <div key={c.phone} className="premium-card p-4 space-y-3">
+            <div key={c.whatsapp} className="premium-card p-4 space-y-3">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="font-display font-bold">{c.name}</p>
-                  <p className="text-xs text-muted-foreground">{c.city}</p>
+                  
                 </div>
                 <div className="text-right">
                   <p className="font-display font-bold text-primary">{formatPKR(c.totalSpent)}</p>
@@ -115,7 +113,7 @@ function AdminCustomers() {
               </div>
               <div className="flex flex-col gap-1.5 pt-2 border-t border-border">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Phone className="size-3.5" /> {c.phone}
+                  <Phone className="size-3.5" /> {c.whatsapp}
                 </div>
                 {c.email && (
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">

@@ -64,7 +64,7 @@ function About() {
           "6,000+ orders delivered nationwide",
           "Every provider and licence hand-verified",
           "Instant to same-day delivery on most orders",
-          "Secure payments & cash on delivery",
+          "Secure payments & instant WhatsApp delivery",
           "24/7 WhatsApp support",
           "Real reviews — we never delete them",
         ].map((t, i) => (

@@ -164,28 +164,8 @@ function AdminSettings() {
         </section>
 
         <section className="premium-card p-6">
-          <h2 className="font-display text-lg font-bold">Shipping &amp; promotions</h2>
+          <h2 className="font-display text-lg font-bold">Store &amp; promotions</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <NumberField
-              label="Free shipping over (PKR)"
-              value={draft.freeShippingOver}
-              onChange={(v) => set("freeShippingOver", v)}
-            />
-            <NumberField
-              label="Nationwide shipping (PKR)"
-              value={draft.shippingFlat}
-              onChange={(v) => set("shippingFlat", v)}
-            />
-            <NumberField
-              label="Karachi Standard (PKR)"
-              value={draft.shippingKarachi || 350}
-              onChange={(v) => set("shippingKarachi", v)}
-            />
-            <NumberField
-              label="Karachi Urgent 24h (PKR)"
-              value={draft.shippingKarachiUrgent || 450}
-              onChange={(v) => set("shippingKarachiUrgent", v)}
-            />
             <TextField
               label="Currency code"
               value={draft.currency}
