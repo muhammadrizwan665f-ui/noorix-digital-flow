@@ -61,9 +61,6 @@ export function rowToProduct(r: Row): Product {
     trending: Boolean(r["trending"]),
     active: r["active"] === undefined ? true : Boolean(r["active"]),
     sortOrder: num(r["sort_order"]),
-    size: (r["size"] as string | null) ?? undefined,
-    fabric: (r["fabric"] as string | null) ?? undefined,
-    texture: (r["texture"] as string | null) ?? undefined,
     reviews: arr(r["reviews"]),
     faqs: arr(r["faqs"]),
   };
@@ -102,9 +99,6 @@ export function productToRow(p: Product): Row {
     trending: p.trending,
     active: p.active,
     sort_order: p.sortOrder,
-    size: p.size ?? null,
-    fabric: p.fabric ?? null,
-    texture: p.texture ?? null,
     updated_at: new Date().toISOString(),
   };
 }

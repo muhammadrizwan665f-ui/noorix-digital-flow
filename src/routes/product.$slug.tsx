@@ -342,28 +342,7 @@ function ProductPage() {
             </span>
           </div>
 
-          <div className="mt-1 grid gap-x-4 gap-y-2 border-y border-primary/10 py-2 text-xs">
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {product.fabric && (
-                <div className="flex flex-col">
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/70">Fabric</span>
-                  <span className="font-medium">{product.fabric}</span>
-                </div>
-              )}
-              {product.texture && (
-                <div className="flex flex-col">
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/70">Texture</span>
-                  <span className="font-medium">{product.texture}</span>
-                </div>
-              )}
-              {product.size && (
-                <div className="flex flex-col">
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/70">Size</span>
-                  <span className="font-medium">{product.size}</span>
-                </div>
-              )}
-            </div>
-          </div>
+          <div className="mt-1" />
 
           {product.flashSale && product.flashEndsAt ? (
             <div className="mt-3 rounded-2xl border border-destructive/40 bg-destructive/10 p-4 sm:mt-5">

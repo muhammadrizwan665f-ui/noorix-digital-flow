@@ -104,9 +104,6 @@ export interface Product {
   active: boolean;
   sortOrder: number;
   reviews: Review[];
-  size?: string | undefined;
-  fabric?: string | undefined;
-  texture?: string | undefined;
   faqs: { q: string; a: string }[];
 }
 

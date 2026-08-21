@@ -541,33 +541,6 @@ function ProductForm({
           onChange={(e) => onChange({ ...value, sold: Number(e.target.value) })}
         />
       </div>
-      <div>
-        <Label>Size</Label>
-        <Input
-          className="mt-1.5"
-          placeholder="e.g. 72 x 32 inches"
-          value={value.size ?? ""}
-          onChange={(e) => onChange({ ...value, size: e.target.value })}
-        />
-      </div>
-      <div>
-        <Label>Fabric</Label>
-        <Input
-          className="mt-1.5"
-          placeholder="e.g. Chiffon, Georgette"
-          value={value.fabric ?? ""}
-          onChange={(e) => onChange({ ...value, fabric: e.target.value })}
-        />
-      </div>
-      <div>
-        <Label>Texture</Label>
-        <Input
-          className="mt-1.5"
-          placeholder="e.g. Soft, Textured, Crinkled"
-          value={value.texture ?? ""}
-          onChange={(e) => onChange({ ...value, texture: e.target.value })}
-        />
-      </div>
       <div className="sm:col-span-2">
         <Label>Tagline</Label>
         <Input
