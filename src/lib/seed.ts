@@ -16,7 +16,7 @@ export const CATEGORIES = [
 ];
 
 export const SEED_SETTINGS: Settings = {
-  theme: "theme-sand",
+  theme: "theme-noorix-blue",
   brandName: "Noorix Digital Lab",
   tagline: "Premium digital products & services, delivered instantly across Pakistan",
   whatsapp: "+923154429417",

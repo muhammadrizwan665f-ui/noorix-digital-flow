@@ -261,6 +261,16 @@
   --sidebar-ring: #0000FF;
 }
 
+/* ---------- 13. Noorix Blue (logo-matched) ---------- */
+.theme-noorix-blue {
+  --primary: #2563EB;
+  --brand: #1D4ED8;
+  --brand-2: #22D3EE;
+  --ring: #2563EB;
+  --sidebar-primary: #2563EB;
+  --sidebar-ring: #2563EB;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

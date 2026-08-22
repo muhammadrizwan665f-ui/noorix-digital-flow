@@ -10,7 +10,8 @@ export type ThemeId =
   | "theme-peach"
   | "theme-pearl-grey"
   | "theme-black-white"
-  | "theme-blue-white";
+  | "theme-blue-white"
+  | "theme-noorix-blue";
 
 export type FontId =
   | "font-serif-classic"

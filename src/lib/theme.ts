@@ -27,6 +27,7 @@ export const THEME_CLASSES: ThemeId[] = [
   "theme-pearl-grey",
   "theme-black-white",
   "theme-blue-white",
+  "theme-noorix-blue",
 ];
 
 export const FONT_CLASSES: FontId[] = [
@@ -55,6 +56,7 @@ export const THEMES: ThemeOption[] = [
   { id: "theme-pearl-grey", name: "Pearl Grey", description: "Modern, chic pearl grey", swatch: ["#C4C7CC"] },
   { id: "theme-black-white", name: "Black & White", description: "Classic black and white", swatch: ["#000000"] },
   { id: "theme-blue-white", name: "Blue & White", description: "Clean blue and white", swatch: ["#0000FF"] },
+  { id: "theme-noorix-blue", name: "Noorix Blue", description: "Electric blue-to-cyan, matched to the Noorix logo", swatch: ["#1D4ED8", "#22D3EE"] },
 ];
 
 export const FONTS: FontOption[] = [
