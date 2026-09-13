@@ -149,11 +149,12 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isAdmin = pathname.startsWith("/admin");
+  const isBareHomepage = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
       <StoreProvider>
-        {isAdmin ? (
+        {isAdmin || isBareHomepage ? (
           <Outlet />
         ) : (
           <div className="flex min-h-screen flex-col">
