@@ -637,9 +637,12 @@ const WHATSAPP_NUMBER = "923154429417";
 function waLink(message){ return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`; }
 
 const generalLink = waLink("Hi Noorix Digital Lab! I'd like to know more about your products.");
-document.getElementById('ctaWaBtn').href = generalLink;
-document.getElementById('floatWaBtn').href = generalLink;
-document.getElementById('footerContactWa').href = generalLink;
+[document.getElementById('ctaWaBtn'), document.getElementById('floatWaBtn'), document.getElementById('footerContactWa')].forEach(el => {
+  if (!el) return;
+  el.href = generalLink;
+  el.target = '_blank';
+  el.rel = 'noopener noreferrer';
+});
 
 const marqueeText = "✨ Trusted & Verified &nbsp;•&nbsp; Delivery within 5 minutes ✨ &nbsp;•&nbsp; Instant Response 8am-2am &nbsp;•&nbsp; Trusted & Verified &nbsp;•&nbsp; Delivery within 5 minutes ✨";
 document.getElementById('marqueeTrack').innerHTML = `<span>${marqueeText}</span><span>${marqueeText}</span>`;
